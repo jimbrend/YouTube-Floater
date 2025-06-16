@@ -2,7 +2,8 @@
 
 **Standalone Floating YouTube Player for macOS**
 
-A simple app for MacBook users (especially those with just one screen) that stays always on top — allowing you to listen to and view YouTube videos while working.
+A simple app for MacBook users (especially those with just one screen) that stays always on top — allowing you to listen to and view YouTube videos while working,
+and easily adjust the volume, position, and opacity.
 
 You don't need a Chrome extension, and it helps you stay focused by keeping your lo-fi music or podcast nearby — without taking up browser space or risking distractions.
 
