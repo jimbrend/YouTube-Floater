@@ -2,7 +2,8 @@
 
 
 ## 📊 Project Completion
-This app is functional but still in testing, I will update here once completed, feel free to submit PRs, issues, or suggestions, thank you!
+This app is functional but still in testing so it works seamlessly, I will update here once completed, feel free to submit PRs, issues, or suggestions, thank you!
+
 **Progress:**  
 🔵🔵🔵🔵🔵🔵🔵🔵⚪⚪ 80%
 
