@@ -127,15 +127,15 @@ Electron is actively maintained, cross-platform, and **Apple Silicon compatible*
 ## 🧰 Tech Stack
 
 
-Electron.js
-Node.js
-HTML5
-CSS3
-Vanilla JavaScript
-YouTube Embed Player
-Electron IPC (ipcMain, ipcRenderer)
-Electron BrowserWindow API
-Electron Packager
+- Electron.js
+- Node.js
+- HTML5
+- CSS3
+- Vanilla JavaScript
+- YouTube Embed Player
+- Electron IPC (ipcMain, ipcRenderer)
+- Electron BrowserWindow API
+- Electron Packager
 
 
 ---
