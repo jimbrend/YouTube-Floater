@@ -149,15 +149,6 @@ Electron is actively maintained, cross-platform, and **Apple Silicon compatible*
 - Node.js  
 - Electron (installed via npm)
 
-### Install
-
-```bash
-git clone https://github.com/your-username/youtube-floater.git
-cd youtube-floater
-npm install
-npm start
-
-
 📸 UI Preview
 Resizable overlay window with opacity and volume sliders, draggable controls, and snap-to-corner positioning. (Add screenshot here if you have one)
 
@@ -174,3 +165,15 @@ Uses postMessage to control volume & playback (within iframe sandbox limits)
 Drag handles and snap logic allow intuitive movement & positioning
 
 Opacity control via BrowserWindow.setOpacity()
+
+### Install
+Project is still in testing
+
+```bash
+git clone https://github.com/your-username/youtube-floater.git
+cd youtube-floater
+npm install
+npm start
+
+
+
