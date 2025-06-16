@@ -1,10 +1,12 @@
 # 🎥 YouTube-Floater
 
 //////////
+
 This app is functional but still in testing, I will update here once completed, feel free to submit PRs, issues, or suggestions, thank you!
 ## 📊 Project Completion
 **Progress:**  
 🔵🔵🔵🔵🔵🔵🔵🔵⚪⚪ 80%
+
 //////////
 
 **Standalone Floating YouTube Player for macOS**
