@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      margin: 0;
+      padding: 10px;
+      background: transparent;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      user-select: none;
+    }
+    .controls {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 10px 10px 20px 10px;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 8px;
+      z-index: 1001;
+      -webkit-app-region: no-drag;
+      pointer-events: auto;
+    }
+    .controls.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .drag-handle {
+      position: relative;
+      cursor: move;
+      color: white;
+      font-size: 24px;
+      width: 30px;
+      height: 30px;
+      padding: 0;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.2);
+      user-select: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s ease;
+    }
+    .drag-handle:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+    .drag-handle-text {
+      position: absolute;
+      left: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      margin-left: 10px;
+      font-size: 12px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      white-space: nowrap;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 4px 8px;
+      border-radius: 4px;
+      pointer-events: none;
+    }
+    .drag-handle:hover .drag-handle-text {
+      opacity: 1;
+    }
+    #urlInput {
+      flex: 1;
+      padding: 8px;
+      border: none;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.9);
+    }
+    .window-controls {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      z-index: 1001;
+      pointer-events: auto;
+    }
+    .window-control-btn {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 14px;
+      border: none;
+      color: white;
+      -webkit-app-region: no-drag;
+      pointer-events: auto;
+    }
+    .close-btn {
+      background: rgba(255, 0, 0, 0.8);
+    }
+    .close-btn:hover {
+      background: rgba(255, 0, 0, 1);
+    }
+    .minimize-btn {
+      background: rgba(255, 200, 0, 0.8);
+    }
+    .minimize-btn:hover {
+      background: rgba(255, 200, 0, 1);
+    }
+    .open-browser-btn {
+      background: rgba(0, 200, 0, 0.8);
+    }
+    .open-browser-btn:hover {
+      background: rgba(0, 200, 0, 1);
+    }
+    .toggle-controls-btn {
+      width: 30px;
+      height: 30px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      -webkit-app-region: no-drag;
+      pointer-events: auto;
+      position: relative;
+    }
+    .toggle-controls-btn:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+    .toggle-controls-btn:hover::after {
+      content: "Show/Hide Controls";
+      position: absolute;
+      left: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      margin-left: 10px;
+      white-space: nowrap;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      color: white;
+    }
+    .container:hover .toggle-controls-btn {
+      opacity: 1;
+    }
+    .slider-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      color: white;
+      font-size: 12px;
+      -webkit-app-region: no-drag;
+      pointer-events: auto;
+    }
+    .slider-container input[type="range"] {
+      width: 100px;
+      -webkit-app-region: no-drag;
+      pointer-events: auto;
+    }
+    .container {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      -webkit-app-region: drag;
+    }
+    .resize-zone {
+      position: absolute;
+      background: transparent;
+      z-index: 1000;
+      transition: background-color 0.2s ease;
+      -webkit-app-region: no-drag;
+      pointer-events: auto;
+    }
+    .resize-zone:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .resize-zone.top {
+      top: 0;
+      left: 30px;
+      right: 30px;
+      height: 20px;
+      cursor: ns-resize;
+    }
+    .resize-zone.left {
+      left: 0;
+      top: 30px;
+      bottom: 50px; /* Keep away from bottom nav */
+      width: 20px;
+      cursor: ew-resize;
+    }
+    .resize-zone.right {
+      right: 0;
+      top: 30px;
+      bottom: 50px; /* Keep away from bottom nav */
+      width: 20px;
+      cursor: ew-resize;
+    }
+    .resize-zone.top-left {
+      top: 0;
+      left: 0;
+      width: 30px;
+      height: 30px;
+      cursor: nw-resize;
+    }
+    .resize-zone.top-right {
+      top: 0;
+      right: 0;
+      width: 30px;
+      height: 30px;
+      cursor: ne-resize;
+    }
+    .player-container {
+      position: relative;
+      flex: 1;
+      -webkit-app-region: no-drag;
+    }
+    #player {
+      border: none;
+      border-radius: 8px;
+      background: black;
+      width: 100%;
+      height: 100%;
+    }
+    .position-controls {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 10px;
+      border-radius: 8px;
+      z-index: 1001;
+      -webkit-app-region: no-drag;
+      pointer-events: auto;
+    }
+    .position-controls .slider-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      color: white;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+    .position-controls .slider-container input[type="range"] {
+      width: 100px;
+      -webkit-appearance: none;
+      background: #333;
+      height: 4px;
+      border-radius: 2px;
+    }
+    .position-controls .slider-container input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 12px;
+      height: 12px;
+      background: #ff0000;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .position-controls .button-row {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .position-controls button {
+      width: 30px;
+      height: 30px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: white;
+      transition: background-color 0.2s ease;
+    }
+    .position-controls button:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+    .drag-handle {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: white;
+      font-size: 14px;
+      cursor: move;
+      padding: 5px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+      margin-bottom: 5px;
+      justify-content: center;
+    }
+    .drag-handle:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+    .controls-container {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 8px;
+      z-index: 1001;
+      -webkit-app-region: no-drag;
+      pointer-events: auto;
+    }
+    .slider-row {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      width: 100%;
+      justify-content: center;
+    }
+    .url-container {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      z-index: 1001;
+      -webkit-app-region: no-drag;
+      pointer-events: auto;
+    }
+    .url-container input {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 4px;
+      background: #000000;
+      color: white;
+      width: 200px;
+      -webkit-app-region: no-drag;
+      pointer-events: auto;
+    }
+    .url-container input::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+    .load-video-btn {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      background: #ff0000;
+      color: white;
+      cursor: pointer;
+      font-weight: 500;
+      -webkit-app-region: no-drag;
+      pointer-events: auto;
+    }
+    .load-video-btn:hover {
+      background: #cc0000;
+    }
+    .play-pause-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 4px;
+      font-size: 16px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 1000;
+    }
+    .player-container:hover .play-pause-overlay {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="resize-zone top"></div>
+    <div class="resize-zone left"></div>
+    <div class="resize-zone right"></div>
+    <div class="resize-zone top-left"></div>
+    <div class="resize-zone top-right"></div>
+    <div class="player-container">
+      <iframe id="player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div class="play-pause-overlay" id="playPauseOverlay">Now Playing</div>
+      <div class="position-controls">
+        <div class="slider-container">
+          <span>Opacity</span>
+          <input type="range" id="opacitySlider" min="20" max="100" value="100">
+        </div>
+        <div class="slider-container">
+          <span>Volume</span>
+          <input type="range" id="volumeSlider" min="0" max="100" value="100">
+        </div>
+        <div class="drag-handle" id="dragHandle">
+          ⤧
+          <span class="drag-handle-text">Adjust Window</span>
+        </div>
+        <div class="button-row">
+          <button id="topLeftBtn" onclick="moveToCorner('top-left')">↖️</button>
+          <button id="topRightBtn" onclick="moveToCorner('top-right')">↗️</button>
+          <button id="bottomLeftBtn" onclick="moveToCorner('bottom-left')">↙️</button>
+          <button id="bottomRightBtn" onclick="moveToCorner('bottom-right')">↘️</button>
+          <button class="toggle-controls-btn" onclick="toggleControls()">👁</button>
+        </div>
+      </div>
+    </div>
+    <div class="controls">
+      <div class="window-controls">
+        <button class="window-control-btn close-btn" onclick="closeApp()">×</button>
+        <button class="window-control-btn minimize-btn" onclick="minimizeWindow()">−</button>
+        <button class="window-control-btn open-browser-btn" onclick="openInBrowser()">↗</button>
+        <button class="load-video-btn" onclick="loadVideo()">Load Video</button>
+      </div>
+      <div class="url-container">
+        <input type="text" id="urlInput" placeholder="Paste YouTube URL">
+      </div>
+    </div>
+  </div>
+  <script>
+    const { ipcRenderer } = require('electron');
+    
+    // Load YouTube home page on start
+    document.getElementById('player').src = 'https://www.youtube.com/';
+    
+    let isPlaying = false;
+    const playPauseOverlay = document.getElementById('playPauseOverlay');
+    const player = document.getElementById('player');
+
+    function loadVideo() {
+      const url = document.getElementById('urlInput').value;
+      const videoID = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]+)/)?.[1];
+      if (videoID) {
+        player.src = `https://www.youtube.com/embed/${videoID}?autoplay=1`;
+        isPlaying = true;
+        playPauseOverlay.textContent = 'Now Playing';
+      } else {
+        alert('Invalid YouTube URL');
+      }
+    }
+
+    function closeApp() {
+      ipcRenderer.send('close-app');
+    }
+
+    function minimizeWindow() {
+      ipcRenderer.send('minimize-window');
+    }
+
+    function openInBrowser() {
+      const currentUrl = player.src;
+      if (currentUrl.includes('youtube.com/embed/')) {
+        const videoId = currentUrl.match(/embed\/([^?]+)/)[1];
+        ipcRenderer.send('open-in-browser', `https://www.youtube.com/watch?v=${videoId}`);
+      } else {
+        ipcRenderer.send('open-in-browser', 'https://www.youtube.com');
+      }
+    }
+
+    function toggleControls() {
+      const controls = document.querySelector('.controls');
+      controls.classList.toggle('hidden');
+    }
+
+    function moveWindow(direction) {
+      ipcRenderer.send('move-window', direction);
+    }
+
+    // Handle opacity changes
+    document.getElementById('opacitySlider').addEventListener('input', (e) => {
+      const opacity = e.target.value;
+      ipcRenderer.send('set-opacity', opacity);
+    });
+
+    // Handle volume changes
+    document.getElementById('volumeSlider').addEventListener('input', (e) => {
+      const volume = e.target.value;
+      if (player && player.contentWindow) {
+        try {
+          player.contentWindow.postMessage(JSON.stringify({
+            event: 'command',
+            func: 'setVolume',
+            args: [volume]
+          }), '*');
+        } catch (error) {
+          console.error('Error setting volume:', error);
+        }
+      }
+    });
+
+    // Listen for volume changes from main process
+    ipcRenderer.on('set-player-volume', (event, volume) => {
+      if (player && player.contentWindow) {
+        try {
+          player.contentWindow.postMessage(JSON.stringify({
+            event: 'command',
+            func: 'setVolume',
+            args: [volume]
+          }), '*');
+        } catch (error) {
+          console.error('Error setting volume:', error);
+        }
+      }
+    });
+
+    // Play/Pause functionality
+    player.addEventListener('mouseenter', () => {
+      if (isPlaying) {
+        playPauseOverlay.textContent = 'Pause';
+      } else {
+        playPauseOverlay.textContent = 'Play';
+      }
+    });
+
+    player.addEventListener('mouseleave', () => {
+      if (isPlaying) {
+        playPauseOverlay.textContent = 'Now Playing';
+      }
+    });
+
+    player.addEventListener('click', () => {
+      if (player.contentWindow) {
+        player.contentWindow.postMessage(JSON.stringify({
+          event: 'command',
+          func: isPlaying ? 'pauseVideo' : 'playVideo'
+        }), '*');
+        isPlaying = !isPlaying;
+        playPauseOverlay.textContent = isPlaying ? 'Now Playing' : 'Paused';
+      }
+    });
+
+    // Window dragging functionality
+    const dragHandle = document.getElementById('dragHandle');
+    let isDragging = false;
+    let startX, startY;
+    let windowX, windowY;
+
+    function onMouseDown(e) {
+      isDragging = true;
+      startX = e.screenX;
+      startY = e.screenY;
+      ipcRenderer.invoke('get-window-position').then(([x, y]) => {
+        windowX = x;
+        windowY = y;
+      });
+      document.body.style.cursor = 'move';
+    }
+
+    function onMouseMove(e) {
+      if (isDragging) {
+        const newX = windowX + (e.screenX - startX);
+        const newY = windowY + (e.screenY - startY);
+        ipcRenderer.send('set-window-position', { x: newX, y: newY });
+      }
+    }
+
+    function onMouseUp() {
+      isDragging = false;
+      document.body.style.cursor = 'default';
+    }
+
+    dragHandle.addEventListener('mousedown', onMouseDown);
+    document.querySelector('.controls').addEventListener('mousedown', (e) => {
+      if (e.target === e.currentTarget || e.target.classList.contains('controls')) {
+        onMouseDown(e);
+      }
+    });
+
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
+    document.addEventListener('mouseleave', onMouseUp);
+
+    // Prevent text selection during drag
+    document.addEventListener('selectstart', (e) => {
+      if (isDragging) {
+        e.preventDefault();
+      }
+    });
+
+    // Keyboard controls for window movement
+    let isWindowFocused = false;
+
+    window.addEventListener('focus', () => {
+      isWindowFocused = true;
+    });
+
+    window.addEventListener('blur', () => {
+      isWindowFocused = false;
+      // Remove active state from all direction buttons
+      document.querySelectorAll('.position-controls button').forEach(btn => {
+        btn.classList.remove('active');
+      });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!isWindowFocused) return;
+
+      let direction = null;
+      let button = null;
+
+      switch(e.key) {
+        case 'ArrowUp':
+          direction = 'up';
+          button = document.getElementById('upBtn');
+          break;
+        case 'ArrowDown':
+          direction = 'down';
+          button = document.getElementById('downBtn');
+          break;
+        case 'ArrowLeft':
+          direction = 'left';
+          button = document.getElementById('leftBtn');
+          break;
+        case 'ArrowRight':
+          direction = 'right';
+          button = document.getElementById('rightBtn');
+          break;
+      }
+
+      if (direction && button) {
+        button.classList.add('active');
+        moveWindow(direction);
+      }
+    });
+
+    document.addEventListener('keyup', (e) => {
+      if (!isWindowFocused) return;
+
+      let button = null;
+      switch(e.key) {
+        case 'ArrowUp':
+          button = document.getElementById('upBtn');
+          break;
+        case 'ArrowDown':
+          button = document.getElementById('downBtn');
+          break;
+        case 'ArrowLeft':
+          button = document.getElementById('leftBtn');
+          break;
+        case 'ArrowRight':
+          button = document.getElementById('rightBtn');
+          break;
+      }
+
+      if (button) {
+        button.classList.remove('active');
+      }
+    });
+
+    // Add resize event listeners to all resize zones
+    document.querySelectorAll('.resize-zone').forEach(zone => {
+      let isResizing = false;
+      let startX, startY, startWidth, startHeight;
+
+      zone.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        isResizing = true;
+        startX = e.screenX;
+        startY = e.screenY;
+        startWidth = window.innerWidth;
+        startHeight = window.innerHeight;
+        
+        const direction = zone.classList[1];
+        let edge = '';
+        
+        switch(direction) {
+          case 'top':
+            edge = 'top';
+            break;
+          case 'left':
+            edge = 'left';
+            break;
+          case 'right':
+            edge = 'right';
+            break;
+          case 'top-left':
+            edge = 'top-left';
+            break;
+          case 'top-right':
+            edge = 'top-right';
+            break;
+        }
+        
+        ipcRenderer.send('start-resize', edge);
+      });
+
+      document.addEventListener('mousemove', (e) => {
+        if (!isResizing) return;
+        
+        const deltaX = e.screenX - startX;
+        const deltaY = e.screenY - startY;
+        
+        ipcRenderer.send('resize-window', {
+          deltaX,
+          deltaY,
+          startWidth,
+          startHeight
+        });
+      });
+
+      document.addEventListener('mouseup', () => {
+        isResizing = false;
+      });
+    });
+
+    // Add corner positioning function
+    function moveToCorner(corner) {
+      ipcRenderer.send('move-to-corner', corner);
+    }
+  </script>
+</body>
+</html> 
