@@ -1,4 +1,7 @@
 # 🎥 YouTube-Floater
+![B2BBFD7B-630D-4ED3-9C3D-FB4DE77D8E04](https://github.com/user-attachments/assets/f816961b-3162-41fd-a038-6a42a4c33283)
+
+
 **Note**: Due to YouTube's CORS restrictions, playback may stop after the first few plays and you may get an error; restart your computer or network to resume. Videos play instantly on first launch and play, then set
 
 1. Download the `.dmg` file from  ****
