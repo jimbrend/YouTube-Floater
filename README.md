@@ -13,7 +13,7 @@
 ## 📊 Project Details and Key Features
 - Paste a YouTube URL and hit enter or Load Video and it should play instantly
 - Opacity and Volume sliders to control the window independently from other Mac apps that are running
-- It floats easily above all your other applications at a low opacity and blends into what youa re doing so you can listen and if you like also view the podcast to avoid clicking outside of any window you're working on.
+- It floats easily above all your other applications at a low opacity and blends into what you are doing so you can listen, and if you like also view the podcast to avoid clicking outside of any window you're working on.
 - Runs as a Mac application so you don't have to deal with chrome extensions, but there's no top bar and show/hide controls are built in for closing, minimizing, and opening up in your default browser if you'd like 
 - Snap buttons to snap to different corners of your screen easily without thinking easily while navigating around to move it out of what you're focusing on
 - Move button for more accurate control to click and drag the window easily without worrying about click the top bar 
