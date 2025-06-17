@@ -116,8 +116,8 @@ Electron is actively maintained, cross-platform, and **Apple Silicon compatible*
 - [ ] Enable persistent state (e.g., window position, volume)  
 - [ ] Add dark/light theme toggle  
 - [x] Add hotkey or button to toggle visibility (clickable UI)  
-- [ ] Caption/summary feature (e.g., integrate with Study.LOL or YouLearn)  
-- [ ] Add AI-powered synopsis or assistant  
+- [ ] Caption/summary feature 
+- [ ] Add AI-powered synopsis or assistant (e.g., integrate with https://Study.lol / YouLearn)  
 - [ ] Add auto-update or "check for updates" feature  
 - [ ] Optional: App notarization & Apple Developer release  
 
@@ -156,37 +156,13 @@ Electron is actively maintained, cross-platform, and **Apple Silicon compatible*
 
 ---
 
-## 🚀 Getting Started
 
-> These steps are for local development. A downloadable `.app` or `.dmg` for Apple Silicon is coming soon!
 
-### Prerequisites
-
-- Node.js  
-- Electron (installed via npm)
-
-📸 UI Preview
-Resizable overlay window with opacity and volume sliders, draggable controls, and snap-to-corner positioning. (Add screenshot here if you have one)
-
-🧠 How It Works
-
-Uses YouTube embed URLs (youtube.com/embed/...)
-
-Loads iframe in a transparent Electron window
-
-Communicates between renderer and main process via ipcRenderer / ipcMain
-
-Uses postMessage to control volume & playback (within iframe sandbox limits)
-
-Drag handles and snap logic allow intuitive movement & positioning
-
-Opacity control via BrowserWindow.setOpacity()
-
-### Install
-Project is still in testing
+### Local Installation 
+For local installation for the project and not just the .dmg you may have to install extra electron dependencies for the node modules files for testing after cloning the repo.
 
 ```bash
-git clone https://github.com/your-username/youtube-floater.git
+git clone https://github.com/jimbrend/youtube-floater.git
 cd youtube-floater
 npm install
 npm start
