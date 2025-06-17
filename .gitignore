@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Backup files
+*.zip
+june16backup.zip
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Electron specific
+**/Electron.app/
+**/Electron Framework.framework/
+
+# Keep DMG files
+!*.dmg 
