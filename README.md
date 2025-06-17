@@ -30,7 +30,7 @@
 A simple app for MacBook users (especially those with just one screen) that stays always on top — allowing you to listen to and view YouTube videos while working,
 and easily adjust the volume, position, and opacity.
 
-You don't need a Chrome extension, and it helps you stay focused by keeping your lo-fi music or podcast nearby — without taking up browser space or screen real estate if you're working on just your macbook with on external monitors and risking distractions.
+You don't need a Chrome extension, and it helps you stay focused by keeping your lo-fi music or podcast nearby — without taking up browser space or screen real estate if you're working on just your macbook with no external monitors and risking distractions.
 
 ---
 
@@ -82,7 +82,7 @@ Native macOS development typically requires:
 - Apple billing setup for users to download apps
 
 **✅ Solution:**  
-Built entirely with Electron (Node.js + JS) — no Apple tools or App Store required. You can run the `.app` directly, even during a work session, without opening Chrome, managing billing, or signing in.
+Built entirely with Electron (Node.js + JS) — no Apple tools or App Store required. You can run the app directly, even during a work session, without opening Chrome, managing billing, or signing in.
 
 ---
 
