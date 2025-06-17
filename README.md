@@ -89,7 +89,7 @@ Built entirely with Electron (Node.js + JS) — no Apple tools or App Store requ
 ### 🛡️ 5. Fully Compatible & Future-Proof
 
 **Problem:**  
-Older tools like Afloat and SIMBL don’t work on modern systems (Sonoma, Sequoia, or Apple Silicon). Updates break support, and they were designed for Sonoma and backward compatibility not for macOS 15 (Sequoia) or upcoming macOS 16 (Tahoe).
+Older tools like Afloat and SIMBL don’t work on modern systems (Sonoma, Sequoia, or Apple Silicon). Updates break support, and they were designed for Sonoma and backward compatibility not for macOS 15 (Sequoia) or upcoming macOS 26 (Tahoe).
 
 **✅ Solution:**  
 Electron is actively maintained, cross-platform, and **Apple Silicon compatible** out of the box. No system-level hacks. Just run and go.
