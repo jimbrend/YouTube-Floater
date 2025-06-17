@@ -1,11 +1,27 @@
 # 🎥 YouTube-Floater
+![B2BBFD7B-630D-4ED3-9C3D-FB4DE77D8E04](https://github.com/user-attachments/assets/84109b4d-f2b5-4bbc-b1cf-fa6a45b0a21b)
 
 
-## 📊 Project Completion
-This app is functional but still in testing so it works seamlessly, I will update here once completed, feel free to submit PRs, issues, or suggestions, thank you!
+## Installation (macOS)
+1. Download the `.dmg` file by clicking on releases on right and clicking on the .dmg file or [just click here to download the application](https://github.com/jimbrend/YouTube-Floater/releases/download/v0.5.0/YouTube.Floater-0.5.0-arm64.dmg) 
+2. Open the `.dmg` and drag the app to your **Applications** folder.
+3. Launch the app from **Applications** and enjoy!
+
+
+**Note** YouTube has built-in restrictions so it may stop working with an error after a few plays, this is detailed below (CORS restrictions), issues and PRs welcome.
+
+## 📊 Project Details and Key Features
+- Paste a YouTube URL and hit enter or Load Video and it should play instantly
+- Opacity and Volume sliders to control the window independently from other Mac apps that are running
+- It floats easily above all your other applications at a low opacity and blends into what youa re doing so you can listen and if you like also view the podcast to avoid clicking outside of any window you're working on.
+- Runs as a Mac application so you don't have to deal with chrome extensions, but there's no top bar and show/hide controls are built in for closing, minimizing, and opening up in your default browser if you'd like 
+- Snap buttons to snap to different corners of your screen easily without thinking easily while navigating around to move it out of what you're focusing on
+- Move button for more accurate control to click and drag the window easily without worrying about click the top bar 
+- Enhanced detection of your cursor so you only have to be near the edge of the player to resize it to your liking, you don't have to be right on the edge of the player
+
 
 **Progress:**  
-🔵🔵🔵🔵🔵🔵🔵🔵⚪⚪ 80%
+🔵🔵🔵🔵🔵🔵🔵🔵⚪⚪ 95%
 
 
 
@@ -14,7 +30,7 @@ This app is functional but still in testing so it works seamlessly, I will updat
 A simple app for MacBook users (especially those with just one screen) that stays always on top — allowing you to listen to and view YouTube videos while working,
 and easily adjust the volume, position, and opacity.
 
-You don't need a Chrome extension, and it helps you stay focused by keeping your lo-fi music or podcast nearby — without taking up browser space or risking distractions.
+You don't need a Chrome extension, and it helps you stay focused by keeping your lo-fi music or podcast nearby — without taking up browser space or screen real estate if you're working on just your macbook with on external monitors and risking distractions.
 
 ---
 
