@@ -19,7 +19,7 @@ Runs as a Mac application so you can minimize it to your dock if you'd like, ins
 ## Installation (macOS)
 
 
-Feedback, submitting any issues, and PRs welcome (especially to help track any console log issues and address the CORS (Cross-Origin Resource Sharing) restrictions!
+Feedback, submitting any issues, and PRs welcome especially to help track any console log issues and address the CORS (Cross-Origin Resource Sharing) restrictions
 
 **Progress:**  
 🔵🔵🔵🔵🔵🔵🔵🔵⚪ 95%
