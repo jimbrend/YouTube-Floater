@@ -16,8 +16,8 @@
 - It floats easily above all your other applications at a low opacity and blends into what you are doing so you can listen, and if you like also view a podcast to avoid clicking outside of any window you're working on, does not require signing in and will also allow you to click on the YouTube button and control the player when hovered over like normal...
 - Runs as a Mac application so you don't have to deal with chrome extensions, but there's no top bar and show/hide controls are built in for closing, minimizing, and opening up in your default browser if you'd like 
 - Snap buttons to snap to different corners of your screen easily without thinking easily while navigating around to move it out of what you're focusing on
-- Move button for more accurate control to click and drag the window easily without worrying about click the top bar 
-- Enhanced detection of your cursor so you only have to be near the edge of the player to resize it to your liking, you don't have to be right on the edge of the player
+- Move button for more accurate control to click and drag the window easily without worrying about clicking accurately right on the top bar 
+- Enhanced detection of your cursor so you only have to be near the edge of the player to resize it to your liking, you don't have to be right on the edge of the player 
 
 
 **Progress:**  
