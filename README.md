@@ -1,14 +1,31 @@
 # 🎥 YouTube-Floater
+**Note**: Due to YouTube's CORS restrictions, playback may stop after the first few plays and you may get an error; restart your computer or network to resume. Videos play instantly on first launch and play, then set
+
+1. Download the `.dmg` file from  ****
+2. Open the `.dmg` and drag the app to your **Applications** folder just like any other Apple app.
+3. Launch the app from **Applications** and enjoy!
 
 
-## 📊 Project Completion
-This app is functional but still in testing so it works seamlessly, I will update here once completed, feel free to submit PRs, issues, or suggestions, thank you!
+## 📊 Project Details
+A lightweight YouTube player with some key features:
+Easily snaps to screen corners to move around your workspace if your are on one screen and still want to enjoy a podcast, 
+Controls to fade opacity, controls volume independently, and stays on top of other windows.
+Perfect for distraction-free podcasts or lo-fi music. 
+
+Runs as a Mac application so you can minimize it to your dock if you'd like, instead of dealing with any chrome extensions or the App Store
+
+
+
+## Installation (macOS)
+
+
+Feedback, submitting any issues, and PRs welcome (especially to help track any console log issues and address the CORS (Cross-Origin Resource Sharing) restrictions!
 
 **Progress:**  
-🔵🔵🔵🔵🔵🔵🔵🔵⚪⚪ 80%
+🔵🔵🔵🔵🔵🔵🔵🔵⚪ 95%
 
 
-
+More details:
 **Standalone Floating YouTube Player for macOS**
 
 A simple app for MacBook users (especially those with just one screen) that stays always on top — allowing you to listen to and view YouTube videos while working,
