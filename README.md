@@ -3,7 +3,7 @@
 
 
 ## Installation (macOS)
-1. Download the `.dmg` file by clicking on releases on right and clicking on the .dmg file or [just click here to download the application](https://github.com/jimbrend/YouTube-Floater/releases/download/v0.5.0/YouTube.Floater-0.5.0-arm64.dmg) 
+1. Currently you can navigate to https://youtubefloater.com where the Mac 3rd Party App is being distributed!
 2. Open the `.dmg` and drag the app to your **Applications** folder.
 3. Launch the app from **Applications** and enjoy!
 
