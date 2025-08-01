@@ -1,14 +1,11 @@
-download it now here for reference: https://www.youtubefloater.com
-
-
-# 🎥 YouTube-Floater
-![B2BBFD7B-630D-4ED3-9C3D-FB4DE77D8E04](https://github.com/user-attachments/assets/84109b4d-f2b5-4bbc-b1cf-fa6a45b0a21b)
-
 
 ## Installation (macOS)
 1. Currently you can navigate to https://youtubefloater.com where the Mac 3rd Party App is being distributed!
 2. Open the `.dmg` and drag the app to your **Applications** folder.
 3. Launch the app from **Applications** and enjoy!
+
+# 🎥 YouTube-Floater
+![B2BBFD7B-630D-4ED3-9C3D-FB4DE77D8E04](https://github.com/user-attachments/assets/84109b4d-f2b5-4bbc-b1cf-fa6a45b0a21b)
 
 
 **Note** YouTube has built-in restrictions so it may stop working with an error after a few plays, this is detailed below (CORS restrictions), issues and PRs welcome.
